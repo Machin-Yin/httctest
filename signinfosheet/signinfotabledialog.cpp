@@ -269,3 +269,105 @@ void SignInfoTableDialog::on_deletePackageButton_clicked()
     packageNoChoose.append(currentPackage);
     packageTableAddItem();
 }
+
+void SignInfoTableDialog::on_buttonBox_accepted()
+{
+    if (!packageNoChoose.isEmpty())
+    {
+        QMessageBox::information(this,
+                            QObject::tr("提示"),
+                            QObject::tr("请对所有软件包添加信息"),
+                            QMessageBox::Ok);
+        return;
+    }
+    QVariantList type;
+    QVariantMap factory;  //对象
+
+    QVariantList company;	//数组
+
+    QMap <QString, QMap<QString, QString> >::iterator itor;
+    for (itor = companyMap.begin(); itor != companyMap.end(); ++itor)
+    {
+        QMap<QString, QString> compInfoMap = itor.value();
+
+        QVariantMap contactInfo;
+        contactInfo.insert("mobilephone", compInfoMap["mobilephone"]);
+        contactInfo.insert("telephone", compInfoMap["telephone"]);
+
+        QVariantMap addressInfo;
+        addressInfo.insert("province", compInfoMap["province"]);
+        addressInfo.insert("city", compInfoMap["city"]);
+
+//        QVariantMap platformInfo;
+//        platformInfo.insert("type", ui->typeComboBox->currentText());
+//        platformInfo.insert("form", ui->formComboBox->currentText());
+
+        QVariantList productInfo;	//数组
+
+        QMap<QString, QStringList>::const_iterator iter = compPkgMap.find(compInfoMap["companyname"]);
+        QStringList productInfoList = iter.value();
+        for (int i = 0; i < productInfoList.count(); i++)
+        {
+            QString proName = productInfoList.at(i);
+            QMap <QString, QMap<QString, QString> >::const_iterator iterator = packageMap.find(proName);
+            QMap <QString, QString> proInfoMap = iterator.value();
+
+            QVariantList dependencyInfo;
+            QStringList depends = proInfoMap["dependency"].split(" ");
+            for (int i = 0; i < depends.count(); i++)
+            {
+               QVariantMap depend;
+               depend.insert("dependedlib", depends.at(i));
+               dependencyInfo.append(depend);
+            }
+
+            QVariantMap developmentPkgDevInfo;
+            developmentPkgDevInfo.insert("name", proInfoMap["name"]);
+            developmentPkgDevInfo.insert("version", proInfoMap["version"]);
+            developmentPkgDevInfo.insert("arch", proInfoMap["arch"]);
+            developmentPkgDevInfo.insert("dependency", dependencyInfo);
+            developmentPkgDevInfo.insert("osversion", proInfoMap["devosversion"]);
+            developmentPkgDevInfo.insert("kernelversion", proInfoMap["devkernelversion"]);
+            developmentPkgDevInfo.insert("socversion", proInfoMap["devsocversion"]);
+            developmentPkgDevInfo.insert("firmwareversion", proInfoMap["devfirmwareversion"]);
+            developmentPkgDevInfo.insert("iomoduleversion", proInfoMap["deviomoduleversion"]);
+            developmentPkgDevInfo.insert("desc", proInfoMap["desc"]);
+
+            QVariantMap runtimeDevInfo;
+            runtimeDevInfo.insert("osversion", proInfoMap["runosversion"]);
+            runtimeDevInfo.insert("kernelversion", proInfoMap["runkernelversion"]);
+            runtimeDevInfo.insert("socversion", proInfoMap["runsocversion"]);
+            runtimeDevInfo.insert("firmwareversion", proInfoMap["runfirmwareversion"]);
+            runtimeDevInfo.insert("iomoduleversion", proInfoMap["runiomoduleversion"]);
+
+            QVariantMap proInfo;
+            proInfo.insert("productname", proInfoMap["productname"]);
+            proInfo.insert("developmentpkgdevinfo", developmentPkgDevInfo);
+            proInfo.insert("runtimedevinfo", runtimeDevInfo);
+            proInfo.insert("installreason", proInfoMap["installreason"]);
+            proInfo.insert("installresult", proInfoMap["installresult"]);
+            proInfo.insert("installwarning", proInfoMap["installwarning"]);
+
+            productInfo.append(proInfo);
+        }
+
+        QVariantMap comp;
+        comp.insert("contactname", compInfoMap["contactname"]);
+        comp.insert("contactinfo", contactInfo);
+        comp.insert("date", compInfoMap["date"]);
+        comp.insert("companyname", compInfoMap["companyname"]);
+        comp.insert("addressinfo", addressInfo);
+//        comp.insert("platform", platformInfo);
+        comp.insert("productinfo", productInfo);
+
+        company.append(comp);
+    }
+
+       factory.insert("nonadapterfactory", company);
+       type.append(factory);
+
+       QJson::Serializer serializer;
+       bool ok;
+       QByteArray jsondata = serializer.serialize(type);
+       json = &jsondata;
+}

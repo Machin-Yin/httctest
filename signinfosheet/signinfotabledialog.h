@@ -32,6 +32,8 @@ private slots:
     void on_viewPackageButton_clicked();
     void on_deletePackageButton_clicked();
 
+    void on_buttonBox_accepted();
+
 private:
     void initTableHeader();
 
@@ -42,9 +44,7 @@ private:
     QMap <QString, QMap<QString, QString> > companyMap;  //<company, QMap<info,value>
     QMap <QString, QStringList> compPkgMap;     //company contain's package
     QMap <QString, QMap<QString, QString> > packageMap;  //package info
-
-    QSplitter *pMainSplitter;
-
+    QByteArray *json;
 };
 
 #endif // SIGNINFOTABLEDIALOG_H
