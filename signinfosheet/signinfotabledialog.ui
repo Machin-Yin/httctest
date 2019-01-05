@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>SignInfoTableDialog</class>
+ <widget class="QDialog" name="SignInfoTableDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>738</width>
+    <height>695</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QDialogButtonBox" name="buttonBox">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>650</y>
+     <width>691</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+   <property name="standardButtons">
+    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="groupBox">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>20</y>
+     <width>611</width>
+     <height>311</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="title">
+    <string>厂商信息</string>
+   </property>
+   <widget class="QTableWidget" name="factoryTable">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>30</y>
+      <width>581</width>
+      <height>271</height>
+     </rect>
+    </property>
+    <column>
+     <property name="text">
+      <string>厂商名称</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>联系人</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>手机</string>
+     </property>
+    </column>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_2">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>340</y>
+     <width>611</width>
+     <height>301</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(207, 238, 218);</string>
+   </property>
+   <property name="title">
+    <string>软件信息</string>
+   </property>
+   <widget class="QTableWidget" name="packageTable">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>30</y>
+      <width>581</width>
+      <height>261</height>
+     </rect>
+    </property>
+    <column>
+     <property name="text">
+      <string>软件包名称</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>软件完整中文名</string>
+     </property>
+    </column>
+   </widget>
+  </widget>
+  <widget class="QPushButton" name="addFactoryButton">
+   <property name="geometry">
+    <rect>
+     <x>630</x>
+     <y>180</y>
+     <width>99</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>添加厂商</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="modifyFactoryButton">
+   <property name="geometry">
+    <rect>
+     <x>630</x>
+     <y>220</y>
+     <width>99</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>修改厂商</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="viewFactoryButton">
+   <property name="geometry">
+    <rect>
+     <x>630</x>
+     <y>260</y>
+     <width>99</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>厂商详情</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="deleteFactoryButton">
+   <property name="geometry">
+    <rect>
+     <x>630</x>
+     <y>300</y>
+     <width>99</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>删除厂商</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="viewPackageButton">
+   <property name="geometry">
+    <rect>
+     <x>630</x>
+     <y>560</y>
+     <width>99</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>软件详情</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="deletePackageButton">
+   <property name="geometry">
+    <rect>
+     <x>630</x>
+     <y>600</y>
+     <width>99</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>删除软件</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="addPackageButton">
+   <property name="geometry">
+    <rect>
+     <x>630</x>
+     <y>480</y>
+     <width>99</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>添加软件</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="modifyPackageButton">
+   <property name="geometry">
+    <rect>
+     <x>630</x>
+     <y>520</y>
+     <width>99</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>修改软件</string>
+   </property>
+  </widget>
+  <zorder>buttonBox</zorder>
+  <zorder>groupBox</zorder>
+  <zorder>groupBox_2</zorder>
+  <zorder>addFactoryButton</zorder>
+  <zorder>modifyFactoryButton</zorder>
+  <zorder>viewFactoryButton</zorder>
+  <zorder>deleteFactoryButton</zorder>
+  <zorder>viewPackageButton</zorder>
+  <zorder>deletePackageButton</zorder>
+  <zorder>addPackageButton</zorder>
+  <zorder>modifyPackageButton</zorder>
+  <zorder>factoryTable</zorder>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>SignInfoTableDialog</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>248</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>SignInfoTableDialog</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>316</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
