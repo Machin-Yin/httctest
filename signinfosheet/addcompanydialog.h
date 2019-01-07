@@ -33,7 +33,8 @@ private:
 
 private slots:
     void parseCity(QString proName);
-    void on_buttonBox_accepted();
+    void on_cancelButton_clicked();
+    void on_sureButton_clicked();
 
 signals:
     void companyChanged();

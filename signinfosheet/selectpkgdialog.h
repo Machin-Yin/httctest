@@ -31,9 +31,11 @@ private:
     void loadAllSelectItems();
 
 private slots:
-    void on_buttonBox_accepted();
     void changed(QTableWidgetItem *item);
     void updatePackageInfo();
+    void on_cancelButton_clicked();
+    void on_sureButton_clicked();
+
 signals:
     void packageChanged();
 private:

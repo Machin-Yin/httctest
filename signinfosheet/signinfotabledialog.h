@@ -31,8 +31,8 @@ private slots:
     void on_modifyPackageButton_clicked();
     void on_viewPackageButton_clicked();
     void on_deletePackageButton_clicked();
-
-    void on_buttonBox_accepted();
+    void on_cancelButton_clicked();
+    void on_sureButton_clicked();
 
 private:
     void initTableHeader();

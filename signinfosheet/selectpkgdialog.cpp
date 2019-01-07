@@ -51,36 +51,6 @@ void SelectPkgDialog::loadAllSelectItems()
     }
 }
 
-void SelectPkgDialog::on_buttonBox_accepted()
-{
-    int rowCount = ui->selectPkgTable->rowCount();
-    QString pkgName;
-
-    for(int row = 0; row < rowCount; row++)
-    {
-        Qt::CheckState state = ui->selectPkgTable->item(row, 0)->checkState();
-
-        if (Qt::Checked == state)
-        {
-            pkgName = ui->selectPkgTable->item(row, 1)->text();
-            break;
-        }
-    }
-    if (pkgName.isEmpty())
-    {
-        QMessageBox::information(this,
-                            QObject::tr("提示"),
-                            QObject::tr("请选择要添加的软件包"),
-                            QMessageBox::Ok);
-        return;
-    }
-
-    AddPackageDialog addPackageDialog(companyPkgMap, pkgMap, pkgName, companyName, packageNoChoose, ADDPKGINFO, this);   //companyname,companypkgmap
-    connect(&addPackageDialog, SIGNAL(packageInfoChanged()), this, SLOT(updatePackageInfo()));
-    addPackageDialog.exec();
-
-}
-
 void SelectPkgDialog::changed(QTableWidgetItem *item)
 {
     int row = ui->selectPkgTable->row(item);
@@ -104,3 +74,41 @@ void SelectPkgDialog::updatePackageInfo()
     emit packageChanged();
 }
 
+void SelectPkgDialog::on_cancelButton_clicked()
+{
+    close();
+}
+
+void SelectPkgDialog::on_sureButton_clicked()
+{
+    int rowCount = ui->selectPkgTable->rowCount();
+    QString pkgName;
+
+    for(int row = 0; row < rowCount; row++)
+    {
+        Qt::CheckState state = ui->selectPkgTable->item(row, 0)->checkState();
+
+        if (Qt::Checked == state)
+        {
+            pkgName = ui->selectPkgTable->item(row, 1)->text();
+            break;
+        }
+    }
+    if (pkgName.isEmpty())
+    {
+        QMessageBox msg_box;
+        msg_box.setWindowTitle(QString::fromUtf8("提示"));
+        msg_box.setText((QString::fromUtf8("请选择要添加的软件包")));
+        msg_box.setStandardButtons(QMessageBox::Ok);
+        msg_box.setButtonText(QMessageBox::Ok,QString::fromUtf8("确认"));
+        msg_box.exec();
+
+        return;
+    }
+
+    AddPackageDialog addPackageDialog(companyPkgMap, pkgMap, pkgName, companyName, packageNoChoose, ADDPKGINFO, this);   //companyname,companypkgmap
+    connect(&addPackageDialog, SIGNAL(packageInfoChanged()), this, SLOT(updatePackageInfo()));
+    addPackageDialog.exec();
+
+    close();
+}

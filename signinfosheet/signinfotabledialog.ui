@@ -2,33 +2,32 @@
 <ui version="4.0">
  <class>SignInfoTableDialog</class>
  <widget class="QDialog" name="SignInfoTableDialog">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>738</width>
-    <height>695</height>
+    <width>732</width>
+    <height>691</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>732</width>
+    <height>691</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>732</width>
+    <height>691</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QDialogButtonBox" name="buttonBox">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>650</y>
-     <width>691</width>
-     <height>32</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
-   <property name="standardButtons">
-    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-   </property>
-  </widget>
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
     <rect>
@@ -50,7 +49,7 @@
       <x>20</x>
       <y>30</y>
       <width>581</width>
-      <height>271</height>
+      <height>281</height>
      </rect>
     </property>
     <column>
@@ -80,7 +79,7 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color: rgb(207, 238, 218);</string>
+    <string notr="true"/>
    </property>
    <property name="title">
     <string>软件信息</string>
@@ -91,7 +90,7 @@
       <x>20</x>
       <y>30</y>
       <width>581</width>
-      <height>261</height>
+      <height>271</height>
      </rect>
     </property>
     <column>
@@ -106,156 +105,162 @@
     </column>
    </widget>
   </widget>
-  <widget class="QPushButton" name="addFactoryButton">
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>2</width>
+     <height>2</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout_2"/>
+  </widget>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>2</width>
+     <height>2</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout_5"/>
+  </widget>
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>630</x>
-     <y>180</y>
-     <width>99</width>
-     <height>27</height>
+     <y>500</y>
+     <width>87</width>
+     <height>140</height>
     </rect>
    </property>
-   <property name="text">
-    <string>添加厂商</string>
-   </property>
+   <layout class="QVBoxLayout" name="verticalLayout_9">
+    <item>
+     <widget class="QPushButton" name="addPackageButton">
+      <property name="text">
+       <string>添加软件</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="modifyPackageButton">
+      <property name="text">
+       <string>修改软件</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="viewPackageButton">
+      <property name="text">
+       <string>软件详情</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="deletePackageButton">
+      <property name="text">
+       <string>删除软件</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
-  <widget class="QPushButton" name="modifyFactoryButton">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>630</x>
-     <y>220</y>
-     <width>99</width>
-     <height>27</height>
+     <y>190</y>
+     <width>87</width>
+     <height>140</height>
     </rect>
    </property>
-   <property name="text">
-    <string>修改厂商</string>
-   </property>
+   <layout class="QVBoxLayout" name="verticalLayout_10">
+    <item>
+     <widget class="QPushButton" name="addFactoryButton">
+      <property name="text">
+       <string>添加厂商</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="modifyFactoryButton">
+      <property name="text">
+       <string>修改厂商</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="viewFactoryButton">
+      <property name="text">
+       <string>厂商详情</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="deleteFactoryButton">
+      <property name="text">
+       <string>删除厂商</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
-  <widget class="QPushButton" name="viewFactoryButton">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>630</x>
-     <y>260</y>
-     <width>99</width>
-     <height>27</height>
+     <x>30</x>
+     <y>650</y>
+     <width>691</width>
+     <height>32</height>
     </rect>
    </property>
-   <property name="text">
-    <string>厂商详情</string>
-   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <spacer name="horizontalSpacer_3">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
+     <widget class="QPushButton" name="cancelButton">
+      <property name="text">
+       <string>取消</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="sureButton">
+      <property name="text">
+       <string>确定</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
-  <widget class="QPushButton" name="deleteFactoryButton">
-   <property name="geometry">
-    <rect>
-     <x>630</x>
-     <y>300</y>
-     <width>99</width>
-     <height>27</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>删除厂商</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="viewPackageButton">
-   <property name="geometry">
-    <rect>
-     <x>630</x>
-     <y>560</y>
-     <width>99</width>
-     <height>27</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>软件详情</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="deletePackageButton">
-   <property name="geometry">
-    <rect>
-     <x>630</x>
-     <y>600</y>
-     <width>99</width>
-     <height>27</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>删除软件</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="addPackageButton">
-   <property name="geometry">
-    <rect>
-     <x>630</x>
-     <y>480</y>
-     <width>99</width>
-     <height>27</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>添加软件</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="modifyPackageButton">
-   <property name="geometry">
-    <rect>
-     <x>630</x>
-     <y>520</y>
-     <width>99</width>
-     <height>27</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>修改软件</string>
-   </property>
-  </widget>
-  <zorder>buttonBox</zorder>
-  <zorder>groupBox</zorder>
-  <zorder>groupBox_2</zorder>
-  <zorder>addFactoryButton</zorder>
-  <zorder>modifyFactoryButton</zorder>
-  <zorder>viewFactoryButton</zorder>
-  <zorder>deleteFactoryButton</zorder>
-  <zorder>viewPackageButton</zorder>
-  <zorder>deletePackageButton</zorder>
-  <zorder>addPackageButton</zorder>
-  <zorder>modifyPackageButton</zorder>
-  <zorder>factoryTable</zorder>
  </widget>
+ <tabstops>
+  <tabstop>sureButton</tabstop>
+  <tabstop>cancelButton</tabstop>
+  <tabstop>addFactoryButton</tabstop>
+  <tabstop>modifyFactoryButton</tabstop>
+  <tabstop>viewFactoryButton</tabstop>
+  <tabstop>deleteFactoryButton</tabstop>
+  <tabstop>addPackageButton</tabstop>
+  <tabstop>modifyPackageButton</tabstop>
+  <tabstop>viewPackageButton</tabstop>
+  <tabstop>deletePackageButton</tabstop>
+  <tabstop>factoryTable</tabstop>
+  <tabstop>packageTable</tabstop>
+ </tabstops>
  <resources/>
- <connections>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>accepted()</signal>
-   <receiver>SignInfoTableDialog</receiver>
-   <slot>accept()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>157</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>rejected()</signal>
-   <receiver>SignInfoTableDialog</receiver>
-   <slot>reject()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>316</x>
-     <y>260</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>286</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

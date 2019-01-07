@@ -19,22 +19,6 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QDialogButtonBox" name="buttonBox">
-   <property name="geometry">
-    <rect>
-     <x>60</x>
-     <y>530</y>
-     <width>591</width>
-     <height>32</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
-   <property name="standardButtons">
-    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-   </property>
-  </widget>
   <widget class="QLabel" name="installWarningLabel">
    <property name="geometry">
     <rect>
@@ -77,9 +61,9 @@
   <widget class="QLineEdit" name="installResultLineEdit">
    <property name="geometry">
     <rect>
-     <x>270</x>
+     <x>240</x>
      <y>480</y>
-     <width>381</width>
+     <width>411</width>
      <height>21</height>
     </rect>
    </property>
@@ -100,9 +84,9 @@
   <widget class="QLineEdit" name="installReasonLineEdit">
    <property name="geometry">
     <rect>
-     <x>270</x>
+     <x>240</x>
      <y>460</y>
-     <width>381</width>
+     <width>411</width>
      <height>21</height>
     </rect>
    </property>
@@ -110,9 +94,9 @@
   <widget class="QLineEdit" name="installWarningLineEdit">
    <property name="geometry">
     <rect>
-     <x>270</x>
+     <x>240</x>
      <y>500</y>
-     <width>381</width>
+     <width>411</width>
      <height>21</height>
     </rect>
    </property>
@@ -120,9 +104,9 @@
   <widget class="QLineEdit" name="productNameLineEdit">
    <property name="geometry">
     <rect>
-     <x>270</x>
+     <x>240</x>
      <y>30</y>
-     <width>381</width>
+     <width>411</width>
      <height>21</height>
     </rect>
    </property>
@@ -171,9 +155,9 @@
    <widget class="QLineEdit" name="developmentFirmwareVersionLineEdit">
     <property name="geometry">
      <rect>
-      <x>260</x>
+      <x>230</x>
       <y>170</y>
-      <width>381</width>
+      <width>411</width>
       <height>21</height>
      </rect>
     </property>
@@ -220,9 +204,9 @@
    <widget class="QLineEdit" name="developmentKernelVersionLineEdit">
     <property name="geometry">
      <rect>
-      <x>260</x>
+      <x>230</x>
       <y>130</y>
-      <width>381</width>
+      <width>411</width>
       <height>21</height>
      </rect>
     </property>
@@ -230,9 +214,9 @@
    <widget class="QLineEdit" name="developmentOsVersionLineEdit">
     <property name="geometry">
      <rect>
-      <x>260</x>
+      <x>230</x>
       <y>110</y>
-      <width>381</width>
+      <width>411</width>
       <height>21</height>
      </rect>
     </property>
@@ -240,9 +224,9 @@
    <widget class="QLineEdit" name="developmentIoModuleVersionLineEdit">
     <property name="geometry">
      <rect>
-      <x>260</x>
+      <x>230</x>
       <y>190</y>
-      <width>381</width>
+      <width>411</width>
       <height>21</height>
      </rect>
     </property>
@@ -302,9 +286,9 @@
    <widget class="QLineEdit" name="developmentSocVersionLineEdit">
     <property name="geometry">
      <rect>
-      <x>260</x>
+      <x>230</x>
       <y>150</y>
-      <width>381</width>
+      <width>411</width>
       <height>21</height>
      </rect>
     </property>
@@ -445,9 +429,9 @@
    <widget class="QLabel" name="runtimeOsVersionLabel">
     <property name="geometry">
      <rect>
-      <x>260</x>
+      <x>230</x>
       <y>30</y>
-      <width>381</width>
+      <width>411</width>
       <height>21</height>
      </rect>
     </property>
@@ -458,9 +442,9 @@
    <widget class="QLabel" name="runtimeFirmwareVersionLabel">
     <property name="geometry">
      <rect>
-      <x>260</x>
+      <x>230</x>
       <y>90</y>
-      <width>381</width>
+      <width>411</width>
       <height>21</height>
      </rect>
     </property>
@@ -471,9 +455,9 @@
    <widget class="QLabel" name="runtimeIoModuleVersionLabel">
     <property name="geometry">
      <rect>
-      <x>260</x>
+      <x>230</x>
       <y>110</y>
-      <width>381</width>
+      <width>411</width>
       <height>21</height>
      </rect>
     </property>
@@ -484,9 +468,9 @@
    <widget class="QLabel" name="runtimeSocVersionLabel">
     <property name="geometry">
      <rect>
-      <x>260</x>
+      <x>230</x>
       <y>70</y>
-      <width>381</width>
+      <width>411</width>
       <height>21</height>
      </rect>
     </property>
@@ -497,9 +481,9 @@
    <widget class="QLabel" name="runtimeKernelVersionLabel">
     <property name="geometry">
      <rect>
-      <x>260</x>
+      <x>230</x>
       <y>50</y>
-      <width>381</width>
+      <width>411</width>
       <height>21</height>
      </rect>
     </property>
@@ -524,47 +508,67 @@
   <widget class="QLineEdit" name="descLineEdit">
    <property name="geometry">
     <rect>
-     <x>270</x>
+     <x>240</x>
      <y>60</y>
-     <width>381</width>
+     <width>411</width>
      <height>21</height>
     </rect>
    </property>
   </widget>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>531</y>
+     <width>631</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <spacer name="horizontalSpacer_3">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>228</width>
+        <height>28</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
+     <widget class="QPushButton" name="cancelButton">
+      <property name="text">
+       <string>取消</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="sureButton">
+      <property name="text">
+       <string>确定</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
  </widget>
+ <tabstops>
+  <tabstop>productNameLineEdit</tabstop>
+  <tabstop>descLineEdit</tabstop>
+  <tabstop>developmentOsVersionLineEdit</tabstop>
+  <tabstop>developmentKernelVersionLineEdit</tabstop>
+  <tabstop>developmentSocVersionLineEdit</tabstop>
+  <tabstop>developmentFirmwareVersionLineEdit</tabstop>
+  <tabstop>developmentIoModuleVersionLineEdit</tabstop>
+  <tabstop>installReasonLineEdit</tabstop>
+  <tabstop>installResultLineEdit</tabstop>
+  <tabstop>installWarningLineEdit</tabstop>
+  <tabstop>cancelButton</tabstop>
+  <tabstop>sureButton</tabstop>
+ </tabstops>
  <resources/>
- <connections>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>accepted()</signal>
-   <receiver>AddPackageDialog</receiver>
-   <slot>accept()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>157</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>rejected()</signal>
-   <receiver>AddPackageDialog</receiver>
-   <slot>reject()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>316</x>
-     <y>260</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>286</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

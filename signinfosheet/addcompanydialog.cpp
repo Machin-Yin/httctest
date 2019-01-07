@@ -92,7 +92,7 @@ void AddCompanyDialog::parseCity(QString proName)
     }
 }
 
-void AddCompanyDialog::on_buttonBox_accepted()
+void AddCompanyDialog::on_sureButton_clicked()
 {
     QMap<QString, QString> addCompanyMap;
     addCompanyMap.insert("contactname", ui->contactNameLineEdit->text());
@@ -106,34 +106,52 @@ void AddCompanyDialog::on_buttonBox_accepted()
     QString compName = ui->companyNameLineEdit->text();
     if (compName.isEmpty())
     {
-        QMessageBox::information(this,
-                            QObject::tr("提示"),
-                            QObject::tr("厂商名称不能为空"),
-                            QMessageBox::Ok);
+        QMessageBox msg_box;
+        msg_box.setWindowTitle(QString::fromUtf8("提示"));
+        msg_box.setText((QString::fromUtf8("厂商名称不能为空")));
+        msg_box.setStandardButtons(QMessageBox::Ok);
+        msg_box.setButtonText(QMessageBox::Ok,QString::fromUtf8("确认"));
+        msg_box.exec();
+
+        return;
     }
 
     if (operType == ADDCOMP && allCompanyMap->contains(ui->companyNameLineEdit->text()))
     {
-        QMessageBox::information(this,
-                            QObject::tr("提示"),
-                            QObject::tr("已存在该厂商信息"),
-                            QMessageBox::Ok);
+        QMessageBox msg_box;
+        msg_box.setWindowTitle(QString::fromUtf8("提示"));
+        msg_box.setText((QString::fromUtf8("已存在该厂商信息")));
+        msg_box.setStandardButtons(QMessageBox::Ok);
+        msg_box.setButtonText(QMessageBox::Ok,QString::fromUtf8("确认"));
+        msg_box.exec();
+
         return;
     }
 
     if (operType == CHANGECOMP)
     {        if (compName != changeComp)
         {
-            QMessageBox::information(this,
-                                QObject::tr("提示"),
-                                QObject::tr("厂商名称不能修改"),
-                                QMessageBox::Ok);
+            QMessageBox msg_box;
+            msg_box.setWindowTitle(QString::fromUtf8("提示"));
+            msg_box.setText((QString::fromUtf8("厂商名称不能修改")));
+            msg_box.setStandardButtons(QMessageBox::Ok);
+            msg_box.setButtonText(QMessageBox::Ok,QString::fromUtf8("确认"));
+            msg_box.exec();
+
             return;
         }
         allCompanyMap->remove(changeComp);
     }
     allCompanyMap->insert(ui->companyNameLineEdit->text(), addCompanyMap);
     emit companyChanged();
+
+    close();
+}
+
+
+void AddCompanyDialog::on_cancelButton_clicked()
+{
+    close();
 }
 
 void AddCompanyDialog::createCities()
@@ -278,4 +296,3 @@ void AddCompanyDialog::createCities()
     proCityMap.insert(QString::fromUtf8("台湾"), taiwan);
 
 }
-

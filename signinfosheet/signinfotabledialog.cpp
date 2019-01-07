@@ -2,6 +2,7 @@
 #include "ui_signinfotabledialog.h"
 #include <QDebug>
 #include <QMessageBox>
+#include <QTextCodec>
 
 SignInfoTableDialog::SignInfoTableDialog(QStringList pkgList, QWidget *parent) :
     QDialog(parent),
@@ -97,17 +98,13 @@ void SignInfoTableDialog::initTableHeader()
     ui->factoryTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
     ui->factoryTable->horizontalHeader()->setStretchLastSection(true);
-    ui->factoryTable->horizontalHeader()->setResizeMode(QHeaderView::Stretch);
+//    ui->factoryTable->horizontalHeader()->setResizeMode(QHeaderView::Stretch);
 
 
     ui->packageTable->setSelectionBehavior(QAbstractItemView::SelectRows); //行选择
     ui->packageTable->setSelectionMode(QAbstractItemView::SingleSelection);
-//    ui->packageTable->horizontalHeader()->setResizeMode(QHeaderView::Stretch);
-//    ui->packageTable->horizontalHeader()->setResizeMode(1, QHeaderView::Interactive);
-//    ui->packageTable->horizontalHeader()->setResizeMode(2, QHeaderView::Interactive);
     ui->packageTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->packageTable->horizontalHeader()->setStretchLastSection(true);
-    ui->packageTable->horizontalHeader()->setResizeMode(QHeaderView::Stretch);
 }
 
 void SignInfoTableDialog::on_addFactoryButton_clicked()
@@ -120,19 +117,28 @@ void SignInfoTableDialog::on_addFactoryButton_clicked()
 
 void SignInfoTableDialog::on_modifyFactoryButton_clicked()
 {
+
     int currentRow = ui->factoryTable->currentRow();
     if (currentRow == -1)
     {
-        QMessageBox::information(this,
-                            QObject::tr("提示"),
-                            QObject::tr("请选择要修改信息的厂商"),
-                            QMessageBox::Ok);
+//        QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF8"));
+//        QMessageBox::information(this,
+//                            QString::fromLocal8Bit("提示"),
+//                            QString::fromLocal8Bit("请选择要修改信息的厂商"),
+//                            QMessageBox::Ok);
+        QMessageBox msg_box;
+        msg_box.setWindowTitle(QString::fromUtf8("提示"));
+        msg_box.setText((QString::fromUtf8("请选择要修改信息的厂商")));
+        msg_box.setStandardButtons(QMessageBox::Ok);
+        msg_box.setButtonText(QMessageBox::Ok,QString::fromUtf8("确认"));
+        msg_box.exec();
+
         return;
     }
     QString currentFactory = ui->factoryTable->item(currentRow, 0)->text();
 
     AddCompanyDialog companyDialog(&companyMap, CHANGECOMP, currentFactory, this);
-    companyDialog.setWindowTitle(QObject::tr("修改厂商信息"));
+    companyDialog.setWindowTitle(QString::fromUtf8("修改厂商信息"));
     connect(&companyDialog, SIGNAL(companyChanged()), this, SLOT(factoryTableAddItem()));
     companyDialog.exec();
 
@@ -144,10 +150,18 @@ void SignInfoTableDialog::on_viewFactoryButton_clicked()
     int currentRow = ui->factoryTable->currentRow();
     if (currentRow == -1)
     {
-        QMessageBox::information(this,
-                            QObject::tr("提示"),
-                            QObject::tr("请选择要查看详情的厂商"),
-                            QMessageBox::Ok);
+//        QMessageBox::information(this,
+//                            QString::fromLocal8Bit("提示"),
+//                            QString::fromLocal8Bit("请选择要查看详情的厂商"),
+//                            QMessageBox::Ok);
+
+        QMessageBox msg_box;
+        msg_box.setWindowTitle(QString::fromUtf8("提示"));
+        msg_box.setText((QString::fromUtf8("请选择要查看详情的厂商")));
+        msg_box.setStandardButtons(QMessageBox::Ok);
+        msg_box.setButtonText(QMessageBox::Ok,QString::fromUtf8("确认"));
+        msg_box.exec();
+
         return;
     }
     QString factoryName = ui->factoryTable->item(currentRow, 0)->text();
@@ -160,10 +174,16 @@ void SignInfoTableDialog::on_deleteFactoryButton_clicked()
     int currentRow = ui->factoryTable->currentRow();
     if (currentRow == -1)
     {
-        QMessageBox::information(this,
-                            QObject::tr("提示"),
-                            QObject::tr("请选择要删除的厂商"),
-                            QMessageBox::Ok);
+//        QMessageBox::information(this,
+//                            QString::fromLocal8Bit("提示"),
+//                            QString::fromLocal8Bit("请选择要删除的厂商"),
+//                            QMessageBox::Ok);
+        QMessageBox msg_box;
+        msg_box.setWindowTitle(QString::fromUtf8("提示"));
+        msg_box.setText((QString::fromUtf8("请选择要删除的厂商")));
+        msg_box.setStandardButtons(QMessageBox::Ok);
+        msg_box.setButtonText(QMessageBox::Ok,QString::fromUtf8("确认"));
+        msg_box.exec();
         return;
     }
     QStringList pkgList;
@@ -188,14 +208,20 @@ void SignInfoTableDialog::on_deleteFactoryButton_clicked()
 void SignInfoTableDialog::on_addPackageButton_clicked()
 {
     int currentRow = ui->factoryTable->currentRow();
-    qDebug() << "currentRow == " << currentRow;
 
     if (currentRow == -1)
     {
-        QMessageBox::information(this,
-                            QObject::tr("提示"),
-                            QObject::tr("请选择要添加软件包的厂商"),
-                            QMessageBox::Ok);
+//        QMessageBox::information(this,
+//                            QString::fromLocal8Bit("提示"),
+//                            QString::fromLocal8Bit("请选择要添加软件包的厂商"),
+//                            QMessageBox::Ok);
+        QMessageBox msg_box;
+        msg_box.setWindowTitle(QString::fromUtf8("提示"));
+        msg_box.setText((QString::fromUtf8("请选择要添加软件包的厂商")));
+        msg_box.setStandardButtons(QMessageBox::Ok);
+        msg_box.setButtonText(QMessageBox::Ok,QString::fromUtf8("确认"));
+        msg_box.exec();
+
         return;
     }
 
@@ -211,10 +237,17 @@ void SignInfoTableDialog::on_modifyPackageButton_clicked()
     int currentRow = ui->packageTable->currentRow();
     if (currentRow == -1)
     {
-        QMessageBox::information(this,
-                            QObject::tr("提示"),
-                            QObject::tr("请选择要修改信息的软件"),
-                            QMessageBox::Ok);
+//        QMessageBox::information(this,
+//                            QString::fromLocal8Bit("提示"),
+//                            QString::fromLocal8Bit("请选择要修改信息的软件"),
+//                            QMessageBox::Ok);
+        QMessageBox msg_box;
+        msg_box.setWindowTitle(QString::fromUtf8("提示"));
+        msg_box.setText((QString::fromUtf8("请选择要修改信息的软件")));
+        msg_box.setStandardButtons(QMessageBox::Ok);
+        msg_box.setButtonText(QMessageBox::Ok,QString::fromUtf8("确认"));
+        msg_box.exec();
+
         return;
     }
     QString pkgName = ui->packageTable->item(currentRow, 0)->text();
@@ -230,10 +263,17 @@ void SignInfoTableDialog::on_viewPackageButton_clicked()
     int currentRow = ui->packageTable->currentRow();
     if (currentRow == -1)
     {
-        QMessageBox::information(this,
-                            QObject::tr("提示"),
-                            QObject::tr("请选择要查看详情的软件"),
-                            QMessageBox::Ok);
+//        QMessageBox::information(this,
+//                            QString::fromLocal8Bit("提示"),
+//                            QString::fromLocal8Bit("请选择要查看详情的软件"),
+//                            QMessageBox::Ok);
+        QMessageBox msg_box;
+        msg_box.setWindowTitle(QString::fromUtf8("提示"));
+        msg_box.setText((QString::fromUtf8("请选择要查看详情的软件")));
+        msg_box.setStandardButtons(QMessageBox::Ok);
+        msg_box.setButtonText(QMessageBox::Ok,QString::fromUtf8("确认"));
+        msg_box.exec();
+
         return;
     }
     QString currentPackage = ui->packageTable->item(currentRow, 0)->text();
@@ -246,10 +286,17 @@ void SignInfoTableDialog::on_deletePackageButton_clicked()
     int currentRow = ui->packageTable->currentRow();
     if (currentRow == -1)
     {
-        QMessageBox::information(this,
-                            QObject::tr("提示"),
-                            QObject::tr("请选择要删除的软件"),
-                            QMessageBox::Ok);
+//        QMessageBox::information(this,
+//                            QString::fromLocal8Bit("提示"),
+//                            QString::fromLocal8Bit("请选择要删除的软件"),
+//                            QMessageBox::Ok);
+        QMessageBox msg_box;
+        msg_box.setWindowTitle(QString::fromUtf8("提示"));
+        msg_box.setText((QString::fromUtf8("请选择要删除的软件")));
+        msg_box.setStandardButtons(QMessageBox::Ok);
+        msg_box.setButtonText(QMessageBox::Ok,QString::fromUtf8("确认"));
+        msg_box.exec();
+
         return;
     }
     QString currentPackage = ui->packageTable->item(currentRow, 0)->text();
@@ -270,14 +317,22 @@ void SignInfoTableDialog::on_deletePackageButton_clicked()
     packageTableAddItem();
 }
 
-void SignInfoTableDialog::on_buttonBox_accepted()
+
+void SignInfoTableDialog::on_sureButton_clicked()
 {
     if (!packageNoChoose.isEmpty())
     {
-        QMessageBox::information(this,
-                            QObject::tr("提示"),
-                            QObject::tr("请对所有软件包添加信息"),
-                            QMessageBox::Ok);
+//        QMessageBox::information(this,
+//                            QString::fromLocal8Bit("提示"),
+//                            QString::fromLocal8Bit("请对所有软件包添加信息"),
+//                            QMessageBox::Ok);
+        QMessageBox msg_box;
+        msg_box.setWindowTitle(QString::fromUtf8("提示"));
+        msg_box.setText((QString::fromUtf8("请对所有软件包添加信息")));
+        msg_box.setStandardButtons(QMessageBox::Ok);
+        msg_box.setButtonText(QMessageBox::Ok,QString::fromUtf8("确认"));
+        msg_box.exec();
+
         return;
     }
     QVariantList type;
@@ -370,4 +425,14 @@ void SignInfoTableDialog::on_buttonBox_accepted()
        bool ok;
        QByteArray jsondata = serializer.serialize(type);
        json = &jsondata;
+
+       qDebug() << "json == " << json;
+
+       close();
 }
+
+void SignInfoTableDialog::on_cancelButton_clicked()
+{
+    close();
+}
+

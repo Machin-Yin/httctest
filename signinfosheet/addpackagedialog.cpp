@@ -127,14 +127,13 @@ void AddPackageDialog::setTochangePkgInfo()
         ui->installResultLineEdit->setStyleSheet("background:transparent;border-width:0;border-style:outset");
         ui->installWarningLineEdit->setStyleSheet("background:transparent;border-width:0;border-style:outset");
 
-        ui->buttonBox->hide();
+        ui->cancelButton->hide();
+        ui->sureButton->hide();
     }
-
 }
 
-void AddPackageDialog::on_buttonBox_accepted()
+void AddPackageDialog::on_sureButton_clicked()
 {
-
     QMap<QString, QString> addPackageMap;
 
     addPackageMap.insert("productname", ui->productNameLineEdit->text());
@@ -180,4 +179,11 @@ void AddPackageDialog::on_buttonBox_accepted()
     packageMap->insert(packageName, addPackageMap);
 
     emit packageInfoChanged();
+
+    close();
+}
+
+void AddPackageDialog::on_cancelButton_clicked()
+{
+    close();
 }
