@@ -1,6 +1,7 @@
 #include "addpackagedialog.h"
 #include "ui_addpackagedialog.h"
-#include "/home/httc/work/fdsrc/softwareInstaller_mergeFD/GUI/include/gui/zyj_info.h"
+
+#include <QMessageBox>
 
 AddPackageDialog::AddPackageDialog(QMap<QString, QStringList> *compPkgMap, QMap<QString, QMap<QString, QString> > *pkgMap, QString pkgName, QString compName, QStringList *pkgNoSelect, PkgInfoOperType type, QWidget *parent) :
     QDialog(parent),
@@ -13,6 +14,7 @@ AddPackageDialog::AddPackageDialog(QMap<QString, QStringList> *compPkgMap, QMap<
     ui(new Ui::AddPackageDialog)
 {
     ui->setupUi(this);
+    init();
     ui->pkgNameLabel->setText(pkgName);
     if (operType == CHANGEPKGINFO || operType == SHOWPKGINFO)
     {
@@ -37,7 +39,7 @@ void AddPackageDialog::getSysInfo()
     else
     {
         ui->runtimeOsVersionLabel->setText(
-                    sysinfo.osver);
+                    QString(sysinfo.osver));
     }
 
     if (strlen(sysinfo.kernelver) == 0)
@@ -48,7 +50,7 @@ void AddPackageDialog::getSysInfo()
     else
     {
         ui->runtimeKernelVersionLabel->setText(
-                    sysinfo.kernelver);
+                    QString(sysinfo.kernelver));
     }
 
     if (strlen(sysinfo.socversion) == 0)
@@ -59,7 +61,7 @@ void AddPackageDialog::getSysInfo()
     else
     {
         ui->runtimeSocVersionLabel->setText(
-                    sysinfo.socversion);
+                    QString(sysinfo.socversion));
     }
 
     if (strlen(sysinfo.biosversion) == 0)
@@ -70,7 +72,7 @@ void AddPackageDialog::getSysInfo()
     else
     {
         ui->runtimeFirmwareVersionLabel->setText(
-                    sysinfo.biosversion);
+                    QString(sysinfo.biosversion));
     }
 
     if (strlen(sysinfo.ioversion) == 0)
@@ -81,8 +83,18 @@ void AddPackageDialog::getSysInfo()
     else
     {
         ui->runtimeIoModuleVersionLabel->setText(
-                    sysinfo.ioversion);
+                    QString(sysinfo.ioversion));
     }
+
+//    char version[2048] = {0};
+//    int  res = -1;
+
+//    res = getVersionRelByPkgName(packageName, version, sizeof(buffer));
+
+//    if ( res == 0 && NULL != buffer)
+//    {
+//      printf("output : [%s]\n", buffer);
+//    }
 }
 
 void AddPackageDialog::setTochangePkgInfo()
@@ -91,7 +103,7 @@ void AddPackageDialog::setTochangePkgInfo()
     QMap<QString, QString> packageInfoMap = itor.value();
 
     ui->productNameLineEdit->setText(packageInfoMap.value("productname"));
-    ui->descLineEdit->setText(packageInfoMap.value("desc"));
+    ui->descTextEdit->setText(packageInfoMap.value("desc"));
     ui->pkgNameLabel->setText(packageInfoMap.value("name"));
     ui->pkgVersionLabel->setText(packageInfoMap.value("version"));
     ui->pkgArchLabel->setText(packageInfoMap.value("arch"));
@@ -109,55 +121,109 @@ void AddPackageDialog::setTochangePkgInfo()
     ui->runtimeFirmwareVersionLabel->setText(packageInfoMap.value("runfirmwareversion"));
     ui->runtimeIoModuleVersionLabel->setText(packageInfoMap.value("runiomoduleversion"));
 
-    ui->installReasonLineEdit->setText(packageInfoMap.value("installreason"));
-    ui->installResultLineEdit->setText(packageInfoMap.value("installresult"));
-    ui->installWarningLineEdit->setText(packageInfoMap.value("installwarning"));
+    ui->installReasonTextEdit->setText(packageInfoMap.value("installreason"));
+    ui->installResultTextEdit->setText(packageInfoMap.value("installresult"));
+    ui->installWarningTextEdit->setText(packageInfoMap.value("installwarning"));
 
     if (operType == SHOWPKGINFO)
     {
 //        setFocusPolicy(Qt::NoFocus);
         ui->productNameLineEdit->setStyleSheet("background:transparent;border-width:0;border-style:outset");
-        ui->descLineEdit->setStyleSheet("background:transparent;border-width:0;border-style:outset");
+        ui->descTextEdit->setStyleSheet("background:transparent;border-width:0;border-style:outset");
         ui->developmentOsVersionLineEdit->setStyleSheet("background:transparent;border-width:0;border-style:outset");
         ui->developmentKernelVersionLineEdit->setStyleSheet("background:transparent;border-width:0;border-style:outset");
         ui->developmentSocVersionLineEdit->setStyleSheet("background:transparent;border-width:0;border-style:outset");
         ui->developmentFirmwareVersionLineEdit->setStyleSheet("background:transparent;border-width:0;border-style:outset");
         ui->developmentIoModuleVersionLineEdit->setStyleSheet("background:transparent;border-width:0;border-style:outset");
-        ui->installReasonLineEdit->setStyleSheet("background:transparent;border-width:0;border-style:outset");
-        ui->installResultLineEdit->setStyleSheet("background:transparent;border-width:0;border-style:outset");
-        ui->installWarningLineEdit->setStyleSheet("background:transparent;border-width:0;border-style:outset");
+        ui->installReasonTextEdit->setStyleSheet("background:transparent;border-width:0;border-style:outset");
+        ui->installResultTextEdit->setStyleSheet("background:transparent;border-width:0;border-style:outset");
+        ui->installWarningTextEdit->setStyleSheet("background:transparent;border-width:0;border-style:outset");
 
         ui->cancelButton->hide();
         ui->sureButton->hide();
     }
 }
 
+void AddPackageDialog::init()
+{
+    QRegExp regExp("^[-|0-9|A-Z|a-z|\.|^\s]{1,128}$");
+    ui->developmentOsVersionLineEdit->setValidator(new QRegExpValidator(regExp,this));
+    ui->developmentKernelVersionLineEdit->setValidator(new QRegExpValidator(regExp,this));
+    ui->developmentSocVersionLineEdit->setValidator(new QRegExpValidator(regExp,this));
+    ui->developmentFirmwareVersionLineEdit->setValidator(new QRegExpValidator(regExp,this));
+    ui->developmentIoModuleVersionLineEdit->setValidator(new QRegExpValidator(regExp,this));
+}
+
 void AddPackageDialog::on_sureButton_clicked()
 {
+    QString productNameStr = ui->productNameLineEdit->text();
+    QString descStr = ui->descTextEdit->toPlainText();
+    QString nameStr = ui->pkgNameLabel->text();
+    QString versionStr = ui->pkgVersionLabel->text();
+    QString archStr = ui->pkgArchLabel->text();
+    QString dependencyStr = ui->pkgDependencyLabel->text();
+
+    QString devosVersionStr = ui->developmentOsVersionLineEdit->text();
+    QString devkernelVersionStr = ui->developmentKernelVersionLineEdit->text();
+    QString devsocVersionStr = ui->developmentSocVersionLineEdit->text();
+    QString devfirmwareversionStr = ui->developmentFirmwareVersionLineEdit->text();
+    QString deviomoduleVersionStr = ui->developmentIoModuleVersionLineEdit->text();
+
+    QString runosVersionStr = ui->runtimeOsVersionLabel->text();
+    QString runkernelVersionStr = ui->runtimeKernelVersionLabel->text();
+    QString runsocVersionStr = ui->runtimeSocVersionLabel->text();
+    QString runfirmwareVersionStr = ui->runtimeFirmwareVersionLabel->text();
+    QString runiomoduleVersionStr = ui->runtimeIoModuleVersionLabel->text();
+
+    QString installReasonStr = ui->installReasonTextEdit->toPlainText();
+    QString installResultStr = ui->installResultTextEdit->toPlainText();
+    QString installWarningStr = ui->installWarningTextEdit->toPlainText();
+
+    if (productNameStr.isEmpty()
+            || descStr.isEmpty()
+            || devosVersionStr.isEmpty()
+            || devkernelVersionStr.isEmpty()
+            || devsocVersionStr.isEmpty()
+            || devfirmwareversionStr.isEmpty()
+            || deviomoduleVersionStr.isEmpty()
+            || installReasonStr.isEmpty()
+            || installResultStr.isEmpty()
+            || installWarningStr.isEmpty())
+    {
+        QMessageBox msg_box;
+        msg_box.setWindowTitle(QString::fromUtf8("提示"));
+        msg_box.setText((QString::fromUtf8("请确保所有必填内容非空")));
+        msg_box.setStandardButtons(QMessageBox::Ok);
+        msg_box.setButtonText(QMessageBox::Ok,QString::fromUtf8("确认"));
+        msg_box.exec();
+
+        return;
+    }
+
     QMap<QString, QString> addPackageMap;
 
-    addPackageMap.insert("productname", ui->productNameLineEdit->text());
-    addPackageMap.insert("desc", ui->descLineEdit->text());
-    addPackageMap.insert("name", ui->pkgNameLabel->text());
-    addPackageMap.insert("version", ui->pkgVersionLabel->text());
-    addPackageMap.insert("arch", ui->pkgArchLabel->text());
-    addPackageMap.insert("dependency", ui->pkgDependencyLabel->text());
+    addPackageMap.insert("productname", productNameStr);
+    addPackageMap.insert("desc", descStr);
+    addPackageMap.insert("name", nameStr);
+    addPackageMap.insert("version", versionStr);
+    addPackageMap.insert("arch", archStr);
+    addPackageMap.insert("dependency", dependencyStr);
 
-    addPackageMap.insert("devosversion", ui->developmentOsVersionLineEdit->text());
-    addPackageMap.insert("devkernelversion", ui->developmentKernelVersionLineEdit->text());
-    addPackageMap.insert("devsocversion", ui->developmentSocVersionLineEdit->text());
-    addPackageMap.insert("devfirmwareversion", ui->developmentFirmwareVersionLineEdit->text());
-    addPackageMap.insert("deviomoduleversion", ui->developmentIoModuleVersionLineEdit->text());
+    addPackageMap.insert("devosversion", devosVersionStr);
+    addPackageMap.insert("devkernelversion", devkernelVersionStr);
+    addPackageMap.insert("devsocversion", devsocVersionStr);
+    addPackageMap.insert("devfirmwareversion", devfirmwareversionStr);
+    addPackageMap.insert("deviomoduleversion", deviomoduleVersionStr);
 
-    addPackageMap.insert("runosversion", ui->runtimeOsVersionLabel->text());
-    addPackageMap.insert("runkernelversion", ui->runtimeKernelVersionLabel->text());
-    addPackageMap.insert("runsocversion", ui->runtimeSocVersionLabel->text());
-    addPackageMap.insert("runfirmwareversion", ui->runtimeFirmwareVersionLabel->text());
-    addPackageMap.insert("runiomoduleversion", ui->runtimeIoModuleVersionLabel->text());
+    addPackageMap.insert("runosversion", runosVersionStr);
+    addPackageMap.insert("runkernelversion", runkernelVersionStr);
+    addPackageMap.insert("runsocversion", runsocVersionStr);
+    addPackageMap.insert("runfirmwareversion", runfirmwareVersionStr);
+    addPackageMap.insert("runiomoduleversion", runiomoduleVersionStr);
 
-    addPackageMap.insert("installreason", ui->installReasonLineEdit->text());
-    addPackageMap.insert("installresult", ui->installResultLineEdit->text());
-    addPackageMap.insert("installwarning", ui->installWarningLineEdit->text());
+    addPackageMap.insert("installreason", installReasonStr);
+    addPackageMap.insert("installresult", installResultStr);
+    addPackageMap.insert("installwarning", installWarningStr);
 
     if (operType == ADDPKGINFO)
     {
@@ -186,4 +252,76 @@ void AddPackageDialog::on_sureButton_clicked()
 void AddPackageDialog::on_cancelButton_clicked()
 {
     close();
+}
+
+void AddPackageDialog::on_descTextEdit_textChanged()
+{
+    QString textContent = ui->descTextEdit->toPlainText();
+    int length = textContent.count();
+    int maxLength = 1024;
+    if(length > maxLength)
+    {
+        QTextCursor cursor = ui->descTextEdit->textCursor();
+        cursor.movePosition(QTextCursor::End);
+        if(cursor.hasSelection())
+        {
+            cursor.clearSelection();
+        }
+        cursor.deletePreviousChar();
+        ui->descTextEdit->setTextCursor(cursor);
+    }
+}
+
+void AddPackageDialog::on_installReasonTextEdit_textChanged()
+{
+    QString textContent = ui->installReasonTextEdit->toPlainText();
+    int length = textContent.count();
+    int maxLength = 1024;
+    if(length > maxLength)
+    {
+        QTextCursor cursor = ui->installReasonTextEdit->textCursor();
+        cursor.movePosition(QTextCursor::End);
+        if(cursor.hasSelection())
+        {
+            cursor.clearSelection();
+        }
+        cursor.deletePreviousChar();
+        ui->installReasonTextEdit->setTextCursor(cursor);
+    }
+}
+
+void AddPackageDialog::on_installResultTextEdit_textChanged()
+{
+    QString textContent = ui->installResultTextEdit->toPlainText();
+    int length = textContent.count();
+    int maxLength = 1024;
+    if(length > maxLength)
+    {
+        QTextCursor cursor = ui->installResultTextEdit->textCursor();
+        cursor.movePosition(QTextCursor::End);
+        if(cursor.hasSelection())
+        {
+            cursor.clearSelection();
+        }
+        cursor.deletePreviousChar();
+        ui->installResultTextEdit->setTextCursor(cursor);
+    }
+}
+
+void AddPackageDialog::on_installWarningTextEdit_textChanged()
+{
+    QString textContent = ui->installWarningTextEdit->toPlainText();
+    int length = textContent.count();
+    int maxLength = 1024;
+    if(length > maxLength)
+    {
+        QTextCursor cursor = ui->installWarningTextEdit->textCursor();
+        cursor.movePosition(QTextCursor::End);
+        if(cursor.hasSelection())
+        {
+            cursor.clearSelection();
+        }
+        cursor.deletePreviousChar();
+        ui->installWarningTextEdit->setTextCursor(cursor);
+    }
 }

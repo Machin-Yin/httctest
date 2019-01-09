@@ -14,6 +14,7 @@ AddCompanyDialog::AddCompanyDialog(QMap<QString, QMap<QString, QString> > *compa
     ui(new Ui::AddCompanyDialog)
 {
     ui->setupUi(this);
+    init();
     createCities();
     parseProvince();
     getCurrentTime();
@@ -27,6 +28,13 @@ AddCompanyDialog::AddCompanyDialog(QMap<QString, QMap<QString, QString> > *compa
 AddCompanyDialog::~AddCompanyDialog()
 {
     delete ui;
+}
+
+void AddCompanyDialog::init()
+{
+    QRegExp regExp("^[0-9\+()-]{1,16}$");
+    ui->mobilePhoneLineEdit->setValidator(new QRegExpValidator(regExp,this));
+    ui->telephoneLineEdit->setValidator(new QRegExpValidator(regExp,this));
 }
 
 void AddCompanyDialog::parseProvince()
@@ -94,27 +102,38 @@ void AddCompanyDialog::parseCity(QString proName)
 
 void AddCompanyDialog::on_sureButton_clicked()
 {
-    QMap<QString, QString> addCompanyMap;
-    addCompanyMap.insert("contactname", ui->contactNameLineEdit->text());
-    addCompanyMap.insert("mobilephone", ui->mobilePhoneLineEdit->text());
-    addCompanyMap.insert("telephone", ui->telephoneLineEdit->text());
-    addCompanyMap.insert("date", ui->dateLabel->text());
-    addCompanyMap.insert("companyname", ui->companyNameLineEdit->text());
-    addCompanyMap.insert("province", ui->provinceComboBox->currentText());
-    addCompanyMap.insert("city", ui->cityComboBox->currentText());
+    QString contactNameStr = ui->contactNameLineEdit->text();
+    QString mobilePhoneStr = ui->mobilePhoneLineEdit->text();
+    QString telePhoneStr = ui->telephoneLineEdit->text();
+    QString dateStr = ui->dateLabel->text();
+    QString companyNameStr = ui->companyNameLineEdit->text();
+    QString provinceStr = ui->provinceComboBox->currentText();
+    QString cityStr = ui->cityComboBox->currentText();
 
-    QString compName = ui->companyNameLineEdit->text();
-    if (compName.isEmpty())
+    if (contactNameStr.isEmpty()
+            || mobilePhoneStr.isEmpty()
+            || companyNameStr.isEmpty()
+            || provinceStr.isEmpty()
+            || cityStr.isEmpty())
     {
         QMessageBox msg_box;
         msg_box.setWindowTitle(QString::fromUtf8("提示"));
-        msg_box.setText((QString::fromUtf8("厂商名称不能为空")));
+        msg_box.setText((QString::fromUtf8("请确保所有必填内容非空")));
         msg_box.setStandardButtons(QMessageBox::Ok);
         msg_box.setButtonText(QMessageBox::Ok,QString::fromUtf8("确认"));
         msg_box.exec();
 
         return;
     }
+
+    QMap<QString, QString> addCompanyMap;
+    addCompanyMap.insert("contactname", contactNameStr);
+    addCompanyMap.insert("mobilephone", mobilePhoneStr);
+    addCompanyMap.insert("telephone", telePhoneStr);
+    addCompanyMap.insert("date", dateStr);
+    addCompanyMap.insert("companyname", companyNameStr);
+    addCompanyMap.insert("province", provinceStr);
+    addCompanyMap.insert("city", cityStr);
 
     if (operType == ADDCOMP && allCompanyMap->contains(ui->companyNameLineEdit->text()))
     {
@@ -129,7 +148,8 @@ void AddCompanyDialog::on_sureButton_clicked()
     }
 
     if (operType == CHANGECOMP)
-    {        if (compName != changeComp)
+    {
+        if (companyNameStr != changeComp)
         {
             QMessageBox msg_box;
             msg_box.setWindowTitle(QString::fromUtf8("提示"));

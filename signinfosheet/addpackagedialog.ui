@@ -6,14 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>665</width>
-    <height>573</height>
+    <width>661</width>
+    <height>670</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>661</width>
+    <height>670</height>
+   </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>665</width>
-    <height>575</height>
+    <width>661</width>
+    <height>670</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -23,99 +29,72 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>500</y>
+     <y>570</y>
      <width>121</width>
      <height>21</height>
     </rect>
    </property>
    <property name="text">
-    <string>安装注意事项</string>
+    <string>*安装注意事项：</string>
    </property>
   </widget>
   <widget class="QLabel" name="installResultLabel">
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>480</y>
+     <y>510</y>
      <width>121</width>
      <height>21</height>
     </rect>
    </property>
    <property name="text">
-    <string>安装结果</string>
+    <string>*安装结果：</string>
    </property>
   </widget>
   <widget class="QLabel" name="productNameLabel">
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>30</y>
-     <width>221</width>
+     <y>10</y>
+     <width>211</width>
      <height>21</height>
     </rect>
    </property>
    <property name="text">
-    <string>产品完整中文名称(含版本号)：</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="installResultLineEdit">
-   <property name="geometry">
-    <rect>
-     <x>240</x>
-     <y>480</y>
-     <width>411</width>
-     <height>21</height>
-    </rect>
+    <string>*产品完整中文名称(含版本号)：</string>
    </property>
   </widget>
   <widget class="QLabel" name="installReasonLabel">
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>460</y>
+     <y>450</y>
      <width>121</width>
      <height>21</height>
     </rect>
    </property>
    <property name="text">
-    <string>安装原因</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="installReasonLineEdit">
-   <property name="geometry">
-    <rect>
-     <x>240</x>
-     <y>460</y>
-     <width>411</width>
-     <height>21</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="installWarningLineEdit">
-   <property name="geometry">
-    <rect>
-     <x>240</x>
-     <y>500</y>
-     <width>411</width>
-     <height>21</height>
-    </rect>
+    <string>*安装原因：</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="productNameLineEdit">
    <property name="geometry">
     <rect>
      <x>240</x>
-     <y>30</y>
+     <y>10</y>
      <width>411</width>
      <height>21</height>
     </rect>
+   </property>
+   <property name="maxLength">
+    <number>256</number>
    </property>
   </widget>
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>90</y>
+     <y>100</y>
      <width>661</width>
      <height>221</height>
     </rect>
@@ -136,7 +115,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>系统版本：</string>
+     <string>*系统版本：</string>
     </property>
    </widget>
    <widget class="QLabel" name="developmentIoModuleVersionLabel">
@@ -149,7 +128,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>IO保密管理模块版本：</string>
+     <string>*IO保密管理模块版本：</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="developmentFirmwareVersionLineEdit">
@@ -160,6 +139,9 @@
       <width>411</width>
       <height>21</height>
      </rect>
+    </property>
+    <property name="maxLength">
+     <number>128</number>
     </property>
    </widget>
    <widget class="QLabel" name="developmentSocVersionLabel">
@@ -172,7 +154,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>安全卡版本：</string>
+     <string>*安全卡版本：</string>
     </property>
    </widget>
    <widget class="QLabel" name="pkgArchlabel">
@@ -180,7 +162,7 @@
      <rect>
       <x>50</x>
       <y>70</y>
-      <width>161</width>
+      <width>121</width>
       <height>21</height>
      </rect>
     </property>
@@ -193,7 +175,7 @@
      <rect>
       <x>50</x>
       <y>50</y>
-      <width>161</width>
+      <width>111</width>
       <height>21</height>
      </rect>
     </property>
@@ -210,6 +192,9 @@
       <height>21</height>
      </rect>
     </property>
+    <property name="maxLength">
+     <number>128</number>
+    </property>
    </widget>
    <widget class="QLineEdit" name="developmentOsVersionLineEdit">
     <property name="geometry">
@@ -220,6 +205,9 @@
       <height>21</height>
      </rect>
     </property>
+    <property name="maxLength">
+     <number>128</number>
+    </property>
    </widget>
    <widget class="QLineEdit" name="developmentIoModuleVersionLineEdit">
     <property name="geometry">
@@ -229,6 +217,9 @@
       <width>411</width>
       <height>21</height>
      </rect>
+    </property>
+    <property name="maxLength">
+     <number>128</number>
     </property>
    </widget>
    <widget class="QLabel" name="developmentKernelVersionLabel">
@@ -241,7 +232,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>内核版本：</string>
+     <string>*内核版本：</string>
     </property>
    </widget>
    <widget class="QLabel" name="developmentFirmwareVersionLabel">
@@ -254,7 +245,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>固件版本：</string>
+     <string>*固件版本：</string>
     </property>
    </widget>
    <widget class="QLabel" name="pkgDependencylabel">
@@ -262,7 +253,7 @@
      <rect>
       <x>50</x>
       <y>90</y>
-      <width>161</width>
+      <width>121</width>
       <height>21</height>
      </rect>
     </property>
@@ -275,7 +266,7 @@
      <rect>
       <x>50</x>
       <y>30</y>
-      <width>161</width>
+      <width>111</width>
       <height>21</height>
      </rect>
     </property>
@@ -292,13 +283,16 @@
       <height>21</height>
      </rect>
     </property>
+    <property name="maxLength">
+     <number>128</number>
+    </property>
    </widget>
    <widget class="QLabel" name="pkgNameLabel">
     <property name="geometry">
      <rect>
-      <x>260</x>
+      <x>230</x>
       <y>30</y>
-      <width>381</width>
+      <width>411</width>
       <height>21</height>
      </rect>
     </property>
@@ -309,9 +303,9 @@
    <widget class="QLabel" name="pkgDependencyLabel">
     <property name="geometry">
      <rect>
-      <x>260</x>
+      <x>230</x>
       <y>90</y>
-      <width>381</width>
+      <width>411</width>
       <height>21</height>
      </rect>
     </property>
@@ -322,9 +316,9 @@
    <widget class="QLabel" name="pkgVersionLabel">
     <property name="geometry">
      <rect>
-      <x>260</x>
+      <x>230</x>
       <y>50</y>
-      <width>381</width>
+      <width>411</width>
       <height>21</height>
      </rect>
     </property>
@@ -335,9 +329,9 @@
    <widget class="QLabel" name="pkgArchLabel">
     <property name="geometry">
      <rect>
-      <x>260</x>
+      <x>230</x>
       <y>70</y>
-      <width>381</width>
+      <width>401</width>
       <height>21</height>
      </rect>
     </property>
@@ -496,30 +490,20 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>60</y>
+     <y>40</y>
      <width>191</width>
      <height>21</height>
     </rect>
    </property>
    <property name="text">
-    <string>软件基本功能描述：</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="descLineEdit">
-   <property name="geometry">
-    <rect>
-     <x>240</x>
-     <y>60</y>
-     <width>411</width>
-     <height>21</height>
-    </rect>
+    <string>*软件基本功能描述：</string>
    </property>
   </widget>
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>531</y>
+     <y>630</y>
      <width>631</width>
      <height>32</height>
     </rect>
@@ -554,18 +538,54 @@
     </item>
    </layout>
   </widget>
+  <widget class="QTextEdit" name="descTextEdit">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>40</y>
+     <width>411</width>
+     <height>51</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QTextEdit" name="installResultTextEdit">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>510</y>
+     <width>411</width>
+     <height>51</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QTextEdit" name="installReasonTextEdit">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>450</y>
+     <width>411</width>
+     <height>51</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QTextEdit" name="installWarningTextEdit">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>570</y>
+     <width>411</width>
+     <height>51</height>
+    </rect>
+   </property>
+  </widget>
  </widget>
  <tabstops>
   <tabstop>productNameLineEdit</tabstop>
-  <tabstop>descLineEdit</tabstop>
   <tabstop>developmentOsVersionLineEdit</tabstop>
   <tabstop>developmentKernelVersionLineEdit</tabstop>
   <tabstop>developmentSocVersionLineEdit</tabstop>
   <tabstop>developmentFirmwareVersionLineEdit</tabstop>
   <tabstop>developmentIoModuleVersionLineEdit</tabstop>
-  <tabstop>installReasonLineEdit</tabstop>
-  <tabstop>installResultLineEdit</tabstop>
-  <tabstop>installWarningLineEdit</tabstop>
   <tabstop>cancelButton</tabstop>
   <tabstop>sureButton</tabstop>
  </tabstops>

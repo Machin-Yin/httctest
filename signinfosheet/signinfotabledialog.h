@@ -36,6 +36,7 @@ private slots:
 
 private:
     void initTableHeader();
+    void getPlatInfo();
 
 private:
     Ui::SignInfoTableDialog *ui;

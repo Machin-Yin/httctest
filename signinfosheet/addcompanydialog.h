@@ -26,6 +26,7 @@ public:
                               QWidget *parent = 0);
     ~AddCompanyDialog();
 private:
+    void init();
     void createCities();
     void parseProvince();
     void getCurrentTime();

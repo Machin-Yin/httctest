@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include "/home/httc/work/fdsrc/softwareInstaller_mergeFD/GUI/include/gui/zyj_info.h"
+//#include "/home/httc/work/fdsrc/softwareInstaller_mergeFD/GUI/include/gui/pack_lib.h"
 
 namespace Ui {
 class AddPackageDialog;
@@ -26,10 +27,15 @@ private:
     void getSysInfo();
     void setTochangePkgInfo();
     void showPkgInfo();
+    void init();
 
 private slots:
     void on_cancelButton_clicked();
     void on_sureButton_clicked();
+    void on_descTextEdit_textChanged();
+    void on_installReasonTextEdit_textChanged();
+    void on_installResultTextEdit_textChanged();
+    void on_installWarningTextEdit_textChanged();
 
 signals:
     void packageInfoChanged();
