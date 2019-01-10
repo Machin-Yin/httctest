@@ -17,7 +17,7 @@ class SignInfoTableDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit SignInfoTableDialog(QStringList pkgList, QWidget *parent = 0);
+    explicit SignInfoTableDialog(QStringList pkgList, QByteArray *jsonData, QWidget *parent = 0);
     ~SignInfoTableDialog();
 
 private slots:

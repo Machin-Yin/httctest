@@ -2,6 +2,8 @@
 #include "ui_addpackagedialog.h"
 
 #include <QMessageBox>
+#include <QProcess>
+#include <QDebug>
 
 AddPackageDialog::AddPackageDialog(QMap<QString, QStringList> *compPkgMap, QMap<QString, QMap<QString, QString> > *pkgMap, QString pkgName, QString compName, QStringList *pkgNoSelect, PkgInfoOperType type, QWidget *parent) :
     QDialog(parent),
@@ -15,7 +17,8 @@ AddPackageDialog::AddPackageDialog(QMap<QString, QStringList> *compPkgMap, QMap<
 {
     ui->setupUi(this);
     init();
-    ui->pkgNameLabel->setText(pkgName);
+    getSysInfo();
+    getPackageInfoByName();
     if (operType == CHANGEPKGINFO || operType == SHOWPKGINFO)
     {
         setTochangePkgInfo();
@@ -71,8 +74,8 @@ void AddPackageDialog::getSysInfo()
     }
     else
     {
-        ui->runtimeFirmwareVersionLabel->setText(
-                    QString(sysinfo.biosversion));
+        QString firmName = QString(sysinfo.biosversion).split("(").at(0).trimmed();
+        ui->runtimeFirmwareVersionLabel->setText(firmName);
     }
 
     if (strlen(sysinfo.ioversion) == 0)
@@ -85,16 +88,43 @@ void AddPackageDialog::getSysInfo()
         ui->runtimeIoModuleVersionLabel->setText(
                     QString(sysinfo.ioversion));
     }
+}
 
-//    char version[2048] = {0};
-//    int  res = -1;
+void AddPackageDialog::getPackageInfoByName()
+{
+    ui->pkgNameLabel->setText(packageName);
+    ui->pkgNameLabel->setToolTip(packageName);
 
-//    res = getVersionRelByPkgName(packageName, version, sizeof(buffer));
+    QProcess process;
+    QString cmd = QString("dpkg -f %1").arg(packageName);
 
-//    if ( res == 0 && NULL != buffer)
-//    {
-//      printf("output : [%s]\n", buffer);
-//    }
+    process.start(cmd);
+    process.waitForFinished();
+    QByteArray output = process.readAllStandardOutput();
+
+    QString strOutPut = output;
+
+    QStringList pkgInfo = strOutPut.split("\n");
+
+    for (int i = 0; i < pkgInfo.count(); i++)
+    {
+        if (pkgInfo.at(i).contains("Version:"))
+        {
+            QString pkgVersion = pkgInfo.at(i).section(':', 1).trimmed();
+            ui->pkgVersionLabel->setText(pkgVersion);
+        }
+        if (pkgInfo.at(i).contains("Architecture:"))
+        {
+            QString pkgArch = pkgInfo.at(i).section(":", 1).trimmed();
+            ui->pkgArchLabel->setText(pkgArch);
+        }
+        if (pkgInfo.at(i).contains("Depends:"))
+        {
+            QString pkgDepends = pkgInfo.at(i).section(":", 1).trimmed();
+            ui->pkgDependencyLabel->setText(pkgDepends);
+            ui->pkgDependencyLabel->setToolTip(pkgDepends);
+        }
+    }
 }
 
 void AddPackageDialog::setTochangePkgInfo()

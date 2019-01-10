@@ -4,10 +4,11 @@
 #include <QMessageBox>
 #include <QTextCodec>
 
-SignInfoTableDialog::SignInfoTableDialog(QStringList pkgList, QWidget *parent) :
+SignInfoTableDialog::SignInfoTableDialog(QStringList pkgList, QByteArray *jsonData, QWidget *parent) :
     QDialog(parent),
     packageNames(pkgList),
     packageNoChoose(pkgList),
+    json(jsonData),
     ui(new Ui::SignInfoTableDialog)
 {
     ui->setupUi(this);
@@ -343,11 +344,11 @@ void SignInfoTableDialog::on_sureButton_clicked()
             QMap <QString, QString> proInfoMap = iterator.value();
 
             QVariantList dependencyInfo;
-            QStringList depends = proInfoMap["dependency"].split(" ");
+            QStringList depends = proInfoMap["dependency"].split(",");
             for (int i = 0; i < depends.count(); i++)
             {
                QVariantMap depend;
-               depend.insert("dependedlib", depends.at(i));
+               depend.insert("dependedlib", depends.at(i).trimmed());
                dependencyInfo.append(depend);
             }
 
@@ -397,11 +398,10 @@ void SignInfoTableDialog::on_sureButton_clicked()
        type.append(factory);
 
        QJson::Serializer serializer;
-       bool ok;
        QByteArray jsondata = serializer.serialize(type);
-       json = &jsondata;
+       json->append(jsondata);
 
-       qDebug() << "json == " << json;
+       qDebug() << "json == " << *json;
 
        close();
 }
@@ -416,9 +416,7 @@ void SignInfoTableDialog::getPlatInfo()
     sysinfo_zyj sysinfo;
 //    get_zyj_sysinfo(&sysinfo);
 
-    QString osName = QString(sysinfo.osname);
-    qDebug() << "sysinfo.osname == " << sysinfo.osname;
-    qDebug() << "osName == " << osName;
+    QString osName = QString::fromUtf8(sysinfo.osname);
     if (osName.isEmpty())
     {
         ui->platTypeLabel->setText(
@@ -429,21 +427,6 @@ void SignInfoTableDialog::getPlatInfo()
         ui->platTypeLabel->setText(
                     osName);
     }
-    if (osName.isEmpty())
-    {
-        ui->platFormLabel->setText(
-                    QString::fromUtf8("Unknown"));
-    }
-    else
-    {
-        if (osName.contains(QString::fromUtf8("桌面")))
-        {
-            ui->platFormLabel->setText(
-                        QString::fromUtf8("客户端"));
-        }
-//        ui->platFormLabel->setText(
-//                    QString::fromUtf8("客户端"));
-    }
-
+    ui->platFormLabel->setText(QString::fromUtf8("客户端"));
 }
 

@@ -25,6 +25,7 @@ public:
 
 private:
     void getSysInfo();
+    void getPackageInfoByName();
     void setTochangePkgInfo();
     void showPkgInfo();
     void init();
