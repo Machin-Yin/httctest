@@ -13,8 +13,16 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        showpkginfodialog.cpp
+    shownonadapterdialog.cpp \
+    adapterfactorydialog.cpp \
+    devicefactorydialog.cpp
 
-HEADERS  += showpkginfodialog.h
+HEADERS  += \
+    shownonadapterdialog.h \
+    adapterfactorydialog.h \
+    devicefactorydialog.h
 
-FORMS    += showpkginfodialog.ui
+FORMS    += \
+    shownonadapterdialog.ui \
+    adapterfactorydialog.ui \
+    devicefactorydialog.ui
