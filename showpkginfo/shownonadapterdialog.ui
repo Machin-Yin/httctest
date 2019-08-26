@@ -81,7 +81,7 @@
   <widget class="QLabel" name="runtimeOsVersionLabel">
    <property name="geometry">
     <rect>
-     <x>60</x>
+     <x>50</x>
      <y>510</y>
      <width>81</width>
      <height>21</height>

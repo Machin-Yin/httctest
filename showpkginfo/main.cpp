@@ -1,10 +1,10 @@
-#include "showpkginfodialog.h"
+#include "devicefactorydialog.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    ShowPkgInfoDialog w;
+    DeviceFactoryDialog w;
     w.show();
 
     return a.exec();
