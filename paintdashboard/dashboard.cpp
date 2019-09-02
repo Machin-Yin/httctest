@@ -196,6 +196,8 @@ void DashBoard::drawNumericValue(QPainter *painter)
 void DashBoard::updateAngle()
 {
     m_value++;
+    if (m_value == 100)
+    {}
     update();
 }
 
